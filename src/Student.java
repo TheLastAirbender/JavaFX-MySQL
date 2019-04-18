@@ -11,6 +11,7 @@ public class Student {
 		this.familyname = familyname;
 	}
 	
+	//System.out.print(id_student);
 	public int getId() {
 		return id_student;
 	}

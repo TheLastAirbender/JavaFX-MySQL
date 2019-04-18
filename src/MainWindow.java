@@ -3,6 +3,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
@@ -18,6 +20,10 @@ public class MainWindow extends Application{
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Успеваемость студентов v.1.0");
+        //Class<?> clazz = new MyClass.class;
+        //InputStream input = 
+        Image image = new Image("/pics/DB.png");
+        ImageView back = new ImageView(image);
         MenuBar mainmenu = new MenuBar();
         
         Menu maintables = new Menu("Основные таблицы");
@@ -37,11 +43,19 @@ public class MainWindow extends Application{
         secondarytables.getItems().addAll(subjOnSpec, session);
         mainmenu.getMenus().addAll(maintables, secondarytables, studyplan, examsplan, studentcard);
         
+        /*пример обработчика нажатия:
+         button.setOnAction(new EventHandler<ActionEvent>() {
+        	 
+            @Override
+            public void handle(ActionEvent event) {
+        	});
+        */
+        
         speciality.setOnAction(new EventHandler<ActionEvent>() {
         	 
             @Override
             public void handle(ActionEvent event) {
-                SpecialityTab specTab = new SpecialityTab();
+            	SpecTab specTab = new SpecTab();
                 Stage arg0 = new Stage();
                 try {
 					specTab.start(arg0);
@@ -51,6 +65,57 @@ public class MainWindow extends Application{
 				}
             	//label.setText(new Date().toString());
             }
+        });
+        
+        students.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				StudentsTab studTab = new StudentsTab();
+				Stage primaryStage = new Stage();
+				try {
+					studTab.start(primaryStage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+        	
+        });
+        
+        groups.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				GroupsTab grpTab = new GroupsTab();
+				Stage primaryStage = new Stage();
+				try {
+					grpTab.start(primaryStage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+        	
+        });
+        
+        subjects.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				SubjTab subjTab = new SubjTab();
+				Stage primaryStage = new Stage();
+				try {
+					subjTab.start(primaryStage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+        	
         });
         /*Button btn = new Button();
         //btn.setText("Say 'Hello World'");
@@ -74,7 +139,9 @@ public class MainWindow extends Application{
         //StackPane root = new StackPane();
         BorderPane root = new BorderPane();
         root.setTop(mainmenu);
+        root.setCenter(back);
         primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
